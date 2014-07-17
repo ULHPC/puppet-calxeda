@@ -34,7 +34,7 @@ class calxeda::params {
     # (Modify to adapt to unsupported OSes)
     #######################################
     # calxeda ipmitool git repo
-    $ipmi_git       = 'git://sources.calxeda.com/ipmitool.git'
+    $ipmi_git       = 'https://github.com/Cynerva/ipmitool.git'
     # calxeda ipmitool dependency
     $ipmi_dep       = 'libssl-dev'
     # calxeda ipmitool build dependency
@@ -50,9 +50,6 @@ class calxeda::params {
 
     # calxeda mgmt tool name (for pip)
     $cxmanage_name  = 'cxmanage'
-
-    # calxeda mgmt tool source (for pip)
-    $cxmanage_src   = 'http://sources.calxeda.com/python/packages'
 
 }
 

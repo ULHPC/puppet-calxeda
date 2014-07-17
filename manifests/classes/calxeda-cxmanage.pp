@@ -76,7 +76,7 @@ class calxeda::cxmanage::common {
     if $calxeda::cxmanage::ensure == 'present' {
 
         exec { 'cxmanage-install':
-            command => "pip install --extra-index-url=${calxeda::params::cxmanage_src} ${calxeda::params::cxmanage_name}",
+            command => "pip install ${calxeda::params::cxmanage_name}",
             path    => "/usr/bin:/usr/sbin:/bin",
             creates => '/usr/local/bin/cxmanage',
             user    => 'root',
