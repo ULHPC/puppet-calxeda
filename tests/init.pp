@@ -16,5 +16,6 @@
 #      sudo puppet apply -t /vagrant/tests/init.pp
 #
 node default {
-    include calxeda
+    include calxeda::ipmi
+    include calxeda::cxmanage
 }
