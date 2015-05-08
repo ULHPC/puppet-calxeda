@@ -1,6 +1,6 @@
 {
   "name": "ULHPC/calxeda",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "UL HPC Management Team",
   "mail": "hpc-sysadmins@uni.lu",
   "summary": "Calxeda management tools",
@@ -19,7 +19,7 @@
       "name": "puppetlabs-vcsrepo",
       "version_range": ">= 1.0.0"
     }
-   ],
+  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "Debian",
