@@ -13,14 +13,14 @@
 #
 #
 
-include 'ULHPC/calxeda::params'
+include 'calxeda::params'
 
-$names = ["ensure", "protocol", "port", "packagename"]
+$names = ['ensure', 'protocol', 'port', 'packagename']
 
-notice("ULHPC/calxeda::params::ensure = ${ULHPC/calxeda::params::ensure}")
-notice("ULHPC/calxeda::params::protocol = ${ULHPC/calxeda::params::protocol}")
-notice("ULHPC/calxeda::params::port = ${ULHPC/calxeda::params::port}")
-notice("ULHPC/calxeda::params::packagename = ${ULHPC/calxeda::params::packagename}")
+notice("calxeda::params::ensure = ${calxeda::params::ensure}")
+notice("calxeda::params::protocol = ${calxeda::params::protocol}")
+notice("calxeda::params::port = ${calxeda::params::port}")
+notice("calxeda::params::packagename = ${calxeda::params::packagename}")
 
 #each($names) |$v| {
 #    $var = "ULHPC/calxeda::params::${v}"

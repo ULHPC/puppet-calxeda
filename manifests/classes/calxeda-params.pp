@@ -25,9 +25,9 @@
 class calxeda::params {
 
     # ensure the presence (or absence) of calxeda
-    $ensure = $calxeda_ensure ? {
+    $ensure = $::calxeda_ensure ? {
         ''      => 'present',
-        default => "${calxeda_ensure}"
+        default => $::calxeda_ensure
     }
 
     #### MODULE INTERNAL VARIABLES  #########

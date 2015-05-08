@@ -53,7 +53,7 @@ inherits calxeda::params
     case $::operatingsystem {
         debian, ubuntu:         { include calxeda::cxmanage::debian }
         default: {
-            fail("Module $module_name is not supported on $operatingsystem")
+            fail("Module $::{module_name} is not supported on $::{operatingsystem}")
         }
     }
 }
@@ -69,18 +69,18 @@ class calxeda::cxmanage::common {
     # Load the variables used in this module. Check the calxeda-params.pp file
     require calxeda::params
 
-    package { "${calxeda::params::cxmanage_dep}":
-        ensure  => "${calxeda::cxmanage::ensure}",
+    package { $calxeda::params::cxmanage_dep:
+        ensure  => $calxeda::cxmanage::ensure,
     }
 
     if $calxeda::cxmanage::ensure == 'present' {
 
         exec { 'cxmanage-install':
             command => "pip install ${calxeda::params::cxmanage_name}",
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             creates => '/usr/local/bin/cxmanage',
             user    => 'root',
-            require => Package["${calxeda::params::cxmanage_dep}"]
+            require => Package[$calxeda::params::cxmanage_dep]
         }
 
     }
@@ -91,12 +91,12 @@ class calxeda::cxmanage::common {
         exec { 'cxmanage-uninstall':
             command => 'make uninstall',
             path    => '/usr/bin:/usr/sbin:/bin',
-            cwd     => "${calxeda::params::cxmanage_build_dir}",
+            cwd     => $calxeda::params::cxmanage_build_dir,
             onlyif  => 'test -f /usr/local/bin/cxmanagetool',
             user    => 'root'
         }
 
-        Exec['cxmanage-uninstall'] -> Package["${calxeda::params::cxmanage_dep}"]
+        Exec['cxmanage-uninstall'] -> Package[$calxeda::params::cxmanage_dep]
 
     }
 

@@ -53,7 +53,7 @@ inherits calxeda::params
     case $::operatingsystem {
         debian, ubuntu:         { include calxeda::ipmi::debian }
         default: {
-            fail("Module $module_name is not supported on $operatingsystem")
+            fail("Module $::{module_name} is not supported on $::{operatingsystem}")
         }
     }
 }
@@ -69,30 +69,28 @@ class calxeda::ipmi::common {
     # Load the variables used in this module. Check the calxeda-params.pp file
     require calxeda::params
 
-    package { "${calxeda::params::ipmi_dep}":
-        ensure  => "${calxeda::ipmi::ensure}",
+    package { $calxeda::params::ipmi_dep:
+        ensure  => $calxeda::ipmi::ensure,
     }
-    package { "${calxeda::params::build_dep}":
-        ensure  => "${calxeda::ipmi::ensure}",
+    package { $calxeda::params::build_dep:
+        ensure  => $calxeda::ipmi::ensure,
     }
 
     if $calxeda::ipmi::ensure == 'present' {
 
         git::clone { 'cx-ipmitool':
-            path    => "${calxeda::params::ipmi_build_dir}",
-            ensure  => "${calxeda::ipmi::ensure}",
-            source  => "${calxeda::params::ipmi_git}",
+            ensure => $calxeda::ipmi::ensure,
+            path   => $calxeda::params::ipmi_build_dir,
+            source => $calxeda::params::ipmi_git,
         }
 
         exec { 'cx-ipmitool-compilation':
-            command => "configure && make && make install",
+            command => 'configure && make && make install',
             path    => "${calxeda::params::ipmi_build_dir}:/usr/bin:/usr/sbin:/bin",
-            cwd     => "${calxeda::params::ipmi_build_dir}",
+            cwd     => $calxeda::params::ipmi_build_dir,
             creates => '/usr/local/bin/ipmitool',
             user    => 'root',
-            require => [ Package["${calxeda::params::ipmi_dep}"],
-                         Package["${calxeda::params::build_dep}"],
-                         Git::Clone['cx-ipmitool'] ]
+            require => [ Package[$calxeda::params::ipmi_dep], Package[$calxeda::params::build_dep], Git::Clone['cx-ipmitool'] ]
         }
 
     }
@@ -103,17 +101,17 @@ class calxeda::ipmi::common {
         exec { 'cx-ipmitool-uninstall':
             command => 'make uninstall',
             path    => '/usr/bin:/usr/sbin:/bin',
-            cwd     => "${calxeda::params::ipmi_build_dir}",
+            cwd     => $calxeda::params::ipmi_build_dir,
             onlyif  => 'test -f /usr/local/bin/ipmitool',
             user    => 'root'
         }
 
-        Exec['cx-ipmitool-uninstall'] -> Package["${calxeda::params::build_dep}"]
+        Exec['cx-ipmitool-uninstall'] -> Package[$calxeda::params::build_dep]
 
         exec { 'cx-ipmitool-remove-src':
             command => "rm -rf ${calxeda::params::ipmi_build_dir}",
             path    => '/usr/bin:/usr/sbin:/bin',
-            cwd     => "${calxeda::params::ipmi_build_dir}",
+            cwd     => $calxeda::params::ipmi_build_dir,
             onlyif  => "test -d ${calxeda::params::ipmi_build_dir}",
             user    => 'root',
             require => Exec['cx-ipmitool-uninstall']
