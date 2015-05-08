@@ -15,7 +15,8 @@
 
 include 'calxeda::params'
 
-$names = ["ensure", "ipmi_git", "ipmi_dep", "build_dep", "ipmi_build_dir", "cxmanage_dep", "cxmanage_name"]
+$names = ['ensure', 'ipmi_git', 'ipmi_dep', 'build_dep', 'ipmi_build_dir',
+          'cxmanage_dep', 'cxmanage_name']
 
 notice("calxeda::params::ensure = ${calxeda::params::ensure}")
 notice("calxeda::params::ipmi_git = ${calxeda::params::ipmi_git}")
