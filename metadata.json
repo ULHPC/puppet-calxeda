@@ -1,0 +1,43 @@
+{
+  "name": "ULHPC/calxeda",
+  "version": "0.1.0",
+  "author": "UL HPC Management Team",
+  "mail": "hpc-sysadmins@uni.lu",
+  "summary": "Calxeda management tools",
+  "description": "Calxeda management tools",
+  "license": "gpl-3.0",
+  "source": "https://github.com/ULHPC/calxeda",
+  "project_page": "https://github.com/ULHPC/calxeda",
+  "issues_url": "https://github.com/ULHPC/calxeda/issues",
+  "forge_url": "https://forge.puppetlabs.com/ULHPC/calxeda",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_range": ">= 1.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    }
+  ],
+  "tags": [
+    "calxeda"
+  ],
+  "classes": [
+    "calxeda::cxmanage",
+    "calxeda::cxmanage::common",
+    "calxeda::cxmanage::debian",
+    "calxeda::ipmi",
+    "calxeda::ipmi::common",
+    "calxeda::ipmi::debian",
+    "calxeda::params"
+  ],
+  "definitions": [
+
+  ]
+}
