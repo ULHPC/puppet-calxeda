@@ -1,10 +1,10 @@
-# File::      <tt>calxeda-ipmi.pp</tt>
-# Author::    Hyacinthe Cartiaux (hyacinthe.cartiaux@uni.lu)
-# Copyright:: Copyright (c) 2013 Hyacinthe Cartiaux
+# File::      <tt>ipmi.pp</tt>
+# Author::    UL HPC Management Team <hpc-sysadmins@uni.lu>
+# Copyright:: Copyright (c) 2015 UL HPC Management Team
 # License::   GPLv3
 #
 # ------------------------------------------------------------------------------
-# = Class: calxeda
+# = Class: calxeda::ipmi
 #
 # Calxeda management tools
 #
@@ -78,10 +78,11 @@ class calxeda::ipmi::common {
 
     if $calxeda::ipmi::ensure == 'present' {
 
-        git::clone { 'cx-ipmitool':
-            ensure => $calxeda::ipmi::ensure,
-            path   => $calxeda::params::ipmi_build_dir,
-            source => $calxeda::params::ipmi_git,
+        vcsrepo { $calxeda::params::ipmi_build_dir:
+            ensure   => $calxeda::ipmi::ensure,
+            provider => git,
+            path     => $calxeda::params::ipmi_build_dir,
+            source   => $calxeda::params::ipmi_git,
         }
 
         exec { 'cx-ipmitool-compilation':
@@ -90,7 +91,7 @@ class calxeda::ipmi::common {
             cwd     => $calxeda::params::ipmi_build_dir,
             creates => '/usr/local/bin/ipmitool',
             user    => 'root',
-            require => [ Package[$calxeda::params::ipmi_dep], Package[$calxeda::params::build_dep], Git::Clone['cx-ipmitool'] ]
+            require => [ Package[$calxeda::params::ipmi_dep], Package[$calxeda::params::build_dep], Vcsrepo[$calxeda::params::ipmi_build_dir] ]
         }
 
     }

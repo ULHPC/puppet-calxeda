@@ -1,10 +1,10 @@
-# File::      <tt>calxeda-cxmanage.pp</tt>
-# Author::    Hyacinthe Cartiaux (hyacinthe.cartiaux@uni.lu)
-# Copyright:: Copyright (c) 2013 Hyacinthe Cartiaux
+# File::      <tt>cxmanage.pp</tt>
+# Author::    UL HPC Management Team <hpc-sysadmins@uni.lu>
+# Copyright:: Copyright (c) 2015 UL HPC Management Team
 # License::   GPLv3
 #
 # ------------------------------------------------------------------------------
-# = Class: calxeda
+# = Class: calxeda::cxmanage
 #
 # Calxeda management tools
 #
